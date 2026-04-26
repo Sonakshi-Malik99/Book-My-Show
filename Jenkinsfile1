@@ -66,13 +66,13 @@ pipeline {
         stage('Docker Build & Push') {
             steps {
                 script {
-                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker') {
+                    withDockerRegistry(credentialsId: 'docker') {
                         sh ''' 
                         echo "Building Docker image..."
-                        docker build --no-cache -t sonakshimalik/bms:latest -f bookmyshow-app/Dockerfile bookmyshow-app
+                        /usr/bin/docker build --no-cache -t sonakshimalik/bms:latest -f bookmyshow-app/Dockerfile bookmyshow-app
 
                         echo "Pushing Docker image to registry..."
-                        docker push sonakshimalik/bms:latest
+                        /usr/bin/docker push sonakshimalik/bms:latest
                         '''
                     }
                 }
