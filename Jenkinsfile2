@@ -4,14 +4,14 @@ pipeline {
     agent any
 
     tools {
-        jdk 'jdk21'
-        nodejs 'node25'
+        jdk 'jdk17'
+        nodejs 'node23'
     }
 
     environment {
         SCANNER_HOME = tool 'sonar-scanner'
         DOCKER_IMAGE = 'sonakshimalik/bms:latest'
-        EKS_CLUSTER_NAME = 'sonakshimalik-eks'
+        EKS_CLUSTER_NAME = 'sonakshi-bms-eks'
         AWS_REGION = 'us-east-1'
     }
 
@@ -44,7 +44,7 @@ pipeline {
         stage('Quality Gate') {
             steps {
                 script {
-                    waitForQualityGate abortPipeline: false, credentialsId: 'sonar-token'
+                    waitForQualityGate abortPipeline: false, credentialsId: 'Sonar-token'
                 }
             }
         }
@@ -127,7 +127,7 @@ pipeline {
                 body: "Project: ${env.JOB_NAME}<br/>" +
                       "Build Number: ${env.BUILD_NUMBER}<br/>" +
                       "URL: ${env.BUILD_URL}<br/>",
-                to: 'sonakshimalik8699@gmail.com',
+                to: 'sonakshimalik415@gmail.com',
                 attachmentsPattern: 'trivyfs.txt'
         }
     }
